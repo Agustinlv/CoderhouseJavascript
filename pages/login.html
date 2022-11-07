@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chunky Puzzles - Login</title>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+</head>
+<body>
+    <header>
+        <nav class="menuBar">
+            <img class="navLogo" src="../img/chunky_logo.png" alt="chunky puzzles logo">
+            <a class ="menuItem" id="inicioMenuItem" href="../index.html">inicio</a>
+            <a class ="menuItem" id="comprarMenuItem" href="../pages/comprar.html">comprar</a>
+            <a class ="menuItem" id="carritoMenuItem" href="../pages/carrito.html">carrito (0)</a>
+            <a class ="menuItem" id="loginMenuItem" href="#">login</a>
+        </nav>
+    </header>
+    <main>
+        <form class="loginForm">
+            <div id="loginData">
+                <div class="loginInputs">
+                    <label class="loginLabel" for="realname">nombre</label>
+                    <input class="loginTextbox" type="text" name="realname" id="realname" value="" placeholder="Ingresa tu nombre">
+                </div>
+                <div class="loginInputs">
+                    <label class="loginLabel" for="username">usuario</label>
+                    <input class="loginTextbox" type="text" name="username" id="username" value="" placeholder="Ingresa tu usuario">
+                </div>
+                <div class="loginInputs">
+                    <label class="loginLabel" for="password">contraseña</label>
+                    <input class="loginTextbox" type="password" name="password" id="password" value="" placeholder="Ingresa tu contraseña">
+                </div>
+            </div>
+            <div id="loginMessage">
+            </div>
+            <div class="loginActions">
+                <div id="loginButton">login</div>
+            </div>
+        </form>
+        <p id="loginNotes">Si el usuario es nuevo, al presionar Login, se generará una nueva entrada para ese usuario. De existir el usuario, va a validar la contraseña.</p>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+    <script src="../js/comun.js"></script>
+    <script src="../js/login.js"></script>
+</html>
