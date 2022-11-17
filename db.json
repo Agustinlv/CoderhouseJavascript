@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "joker",
+        "value": 4500,
+        "count": 200,
+        "image": "../img/thumbs/joker-van-gogh.png"
+    },
+    {
+        "id": 2,
+        "name": "gato pop",
+        "value": 3500,
+        "count": 250,
+        "image": "../img/thumbs/gato-pop.png"
+    },
+    {
+        "id": 3,
+        "name": "lapices de colores",
+        "value": 3000,
+        "count": 220,
+        "image": "../img/thumbs/lapices.png"
+    },
+    {
+        "id": 4,
+        "name": "leon multicolor",
+        "value": 4000,
+        "count": 500,
+        "image": "../img/thumbs/leon-multicolor.png"
+    },
+    {
+        "id": 5,
+        "name": "gradientes",
+        "value": 3500,
+        "count": 200,
+        "image": "../img/thumbs/gradientes.png"
+    },
+    {
+        "id": 6,
+        "name": "catrina",
+        "value": 6000,
+        "count": 500,
+        "image": "../img/thumbs/catrina.png"
+    }
+]

@@ -1,3 +1,4 @@
+const fs = require('fs');
 const userDBKey = "userDB";
 const loguedInKey = "loguedIn";
 const cartKey = "cart";
