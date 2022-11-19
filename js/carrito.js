@@ -17,26 +17,31 @@ async function populateCart(){
     };
     
     for(let i = 0; i < storedCartArr.length; i++){
-        //Creo el div que va a contener el detalle de cada item en el carrito
-        let cartItemDOM = document.createElement('div');
-        cartItemDOM.className = "cartItem";
-        //El img
-        let cartItemImgDOM = document.createElement('img');
-        cartItemImgDOM.id = "cartItemImg"
-        //Busco el objeto con el id que haya en el índice actual y lo uso para sacar los datos de ese objeto.
         let itemObject = catalog.find(obj => obj.id === storedCartArr[i]);
-        totalValue = totalValue + itemObject.value;
-        cartTotalValueDOM.textContent = `$${totalValue}`;
-        //El path a la imagen
-        cartItemImgDOM.src = itemObject.image;
-        //El nombre del puzzle
+        let cartItemDOM = document.createElement('div');
+        let cartItemImgDOM = document.createElement('img');
         let cartItemNameDOM = document.createElement('div');
+        let cartItemDescDOM = document.createElement('cartItemDesc');
+        let cartQtyContDOM = document.createElement('div');
+        let removeButtonDOM = document.createElement('button');
+        let UlDOM = document.createElement('ul');
+        
+        cartItemDOM.className = "cartItem";
+        cartItemImgDOM.id = "cartItemImg"
+        cartItemImgDOM.src = itemObject.image;
         cartItemNameDOM.id = "cartItemName";
         cartItemNameDOM.textContent = itemObject.name;
-        //Los detalles
-        let cartItemDescDOM = document.createElement('cartItemDesc');
         cartItemDescDOM.className = "cartItemDesc";
-        let UlDOM = document.createElement('ul');
+        cartQtyContDOM.id = "cartQtyCont";
+        removeButtonDOM.className = "removeFromCartButton";
+        removeButtonDOM.textContent = "quitar item";
+        removeButtonDOM.id = itemObject.id;
+        removeButtonDOM.addEventListener('click',removeFromCart);
+        
+        //Actualizo el valor total de la compra
+        totalValue = totalValue + itemObject.value;
+        cartTotalValueDOM.textContent = `$${totalValue}`;
+
         //Limito el for para que vaya del 2 al 4 porque necesito extraer la segunda y la tercera propiedad de cada elemento
         for(let n = 2; n < 4; n++){
             let li = document.createElement('li');
@@ -53,17 +58,9 @@ async function populateCart(){
             };
             UlDOM.appendChild(li);
         };
-        cartItemDescDOM.appendChild(UlDOM);
-        //El botón para remover el item
-        let cartQtyContDOM = document.createElement('div');
-        cartQtyContDOM.id = "cartQtyCont";
-        let removeButtonDOM = document.createElement('button');
-        removeButtonDOM.className = "removeFromCartButton";
-        removeButtonDOM.textContent = "quitar item";
-        removeButtonDOM.id = itemObject.id;
-        removeButtonDOM.addEventListener('click',removeFromCart);
-        cartQtyContDOM.appendChild(removeButtonDOM);
         //Finalmente ensamblo todas las partes que componen cada item en la lista del carrito
+        cartItemDescDOM.appendChild(UlDOM);
+        cartQtyContDOM.appendChild(removeButtonDOM);
         cartItemDOM.appendChild(cartItemImgDOM);
         cartItemDOM.appendChild(cartItemNameDOM);
         cartItemDOM.appendChild(cartItemDescDOM);
@@ -104,7 +101,7 @@ async function checkout(){
     let url = 'https://my-json-server.typicode.com/agustinlv/coderhousejavascript/payment';
     //Estoy usando la librería axios para hacer el get. Por ahora no se me ocurre qué otra librería relevante usar y sé que voy a estar usandola mucho en mi proyecto real
     let paymentStatus = await axios.get(url);
-    //Estoy simulando una pequeña chance de que falle la transacción.
+    //Estoy simulando una pequeña chance de que falle la transacción como para mostrar otro mensaje que sea solamente el de compra exitosa
     if(Math.random() >= 0.25){
         showCartMessage(paymentStatus.data["resolve"]);
         localStorage.setItem(cartKey,JSON.stringify([]));
@@ -112,6 +109,7 @@ async function checkout(){
     }else{
         showCartMessage(paymentStatus.data["error"]);
     };
+    //Le meto un timeout a repopular el cart luego de una compra exitosa sólo para que mensaje de compra exitosa se muestre un tiempito más. En un proyecto real esto no debería existir.
     setTimeout(()=>{
         populateCart();
     },1500)

@@ -4,23 +4,9 @@ const cartKey = "cart";
 const closeSesionMessage = "cerrar sesion";
 const loginButtonDefaultText = "login";
 const loginMenuItem = document.getElementById('loginMenuItem');
-const realnameInput = document.getElementById('realname');
-const usernameInput = document.getElementById('username');
-const passwordInput = document.getElementById('password');
 const comprarMenuItem = document.getElementById('comprarMenuItem');
 const cartMenuItem = document.getElementById('carritoMenuItem');
 const catalogContainer = document.getElementById('catalogContainer');
-
-class User {
-    realname = "";
-    username = "";
-    password = "";
-    constructor(realname,username,password){
-        this.realname = realname;
-        this.username= username;
-        this.password = password;
-    };
-};
 
 async function fetchCatalog(){
     let url = 'https://my-json-server.typicode.com/agustinlv/coderhousejavascript/products';

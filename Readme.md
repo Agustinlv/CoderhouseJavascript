@@ -5,3 +5,4 @@ El sitio va a ser el portal de ventas de la fábrica de puzzles Chunky. Por el m
 - Una vez logueado, se hacen visibles la solapa de COMPRAR y CARRITO.
 - Cuando se hace click en AGREGAR AL CARRITO, se agrega el item al carrito (un array de IDs en Local Storage) y se agrega el item a la sección CARRITO.
 - Cuando se elimina del carrito, se borra el item de la sección y se recalcula la cantidad de items en el carrito.
+- No hay muchas librerías pertinente a esta entrega, así que estoy usando axios para hacer un get de la respuesta de la compra.
