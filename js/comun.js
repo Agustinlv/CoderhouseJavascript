@@ -10,7 +10,6 @@ const passwordInput = document.getElementById('password');
 const comprarMenuItem = document.getElementById('comprarMenuItem');
 const cartMenuItem = document.getElementById('carritoMenuItem');
 const catalogContainer = document.getElementById('catalogContainer');
-const axios = require('axios').default;
 
 class User {
     realname = "";

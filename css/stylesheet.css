@@ -319,7 +319,7 @@ p{
     font-size: 0.75rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.cartEmptyMessage{
+.cartMessage{
     display: flex;
     justify-content: center;
     align-items: center;

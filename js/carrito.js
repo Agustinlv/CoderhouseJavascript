@@ -1,5 +1,3 @@
-const { default: axios } = require("axios");
-
 const cartItemContainer = document.getElementById('cartItemContainer');
 const checkoutButtonDOM = document.getElementById('checkoutBtn');
 const cartDetailMessageDOM = document.getElementById('cartDetailMessage');
@@ -14,11 +12,7 @@ async function populateCart(){
     cartItemContainer.replaceChildren();
     
     if (storedCartArr.length === 0){
-        let cartEmptyMessageDOM = document.createElement('h2');
-        cartEmptyMessageDOM.className = "cartEmptyMessage";
-        cartEmptyMessageDOM.textContent = "El carrito de compras está vacío";
-        cartItemContainer.appendChild(cartEmptyMessageDOM);
-        cartDetailDOM.style	= "display: none";
+        showCartMessage("el carrito de compras está vacío");
         return;
     };
     
@@ -97,12 +91,30 @@ function removeFromCart(){
     populateCart();
 };
 
+function showCartMessage(message){
+    let cartEmptyMessageDOM = document.createElement('h2');
+    cartEmptyMessageDOM.className = "cartMessage";
+    cartEmptyMessageDOM.textContent = message;
+    cartItemContainer.replaceChildren();
+    cartItemContainer.appendChild(cartEmptyMessageDOM);
+    cartDetailDOM.style	= "display: none";
+};
+
 async function checkout(){
-    let url = 'https://my-json-server.typicode.com/agustinlv/coderhousejavascript/products';
-    let response = await axios.get(url).then((response)=>response.json());
-    localStorage.setItem(cartKey,JSON.stringify([]));
-    updateCartMenuItem(getCartSize());
-    populateCart();
+    let url = 'https://my-json-server.typicode.com/agustinlv/coderhousejavascript/payment';
+    //Estoy usando la librería axios para hacer el get. Por ahora no se me ocurre qué otra librería relevante usar y sé que voy a estar usandola mucho en mi proyecto real
+    let paymentStatus = await axios.get(url);
+    //Estoy simulando una pequeña chance de que falle la transacción.
+    if(Math.random() >= 0.25){
+        showCartMessage(paymentStatus.data["resolve"]);
+        localStorage.setItem(cartKey,JSON.stringify([]));
+        updateCartMenuItem(getCartSize());
+    }else{
+        showCartMessage(paymentStatus.data["error"]);
+    };
+    setTimeout(()=>{
+        populateCart();
+    },1500)
 };
 
 function cartMain(){
