@@ -1,4 +1,5 @@
-function generateCatalog(){
+async function generateCatalog(){
+    const catalog = await fetchCatalog();
     for(let i = 0; i < catalog.length; i++){
         let productContainer = document.createElement('div');
         let prodImgCont = document.createElement('div');
@@ -61,14 +62,24 @@ function generateCatalog(){
 function addToCart(){
     let storedCart = JSON.parse(localStorage.getItem(cartKey));
     let currentCart = [];
-
+    let addToCartButtonDOM = document.getElementById(this.id);
+    
     if(storedCart){
         currentCart = storedCart;
     };
-    
+
+    addToCartButtonDOM.textContent = "agregado!";
+    addToCartButtonDOM.style = "background-color:  rgb(104, 218, 69)";
+    addToCartButtonDOM.removeEventListener('click',addToCart);
     currentCart.push(parseInt(this.id));
     localStorage.setItem(cartKey,JSON.stringify(currentCart));
     updateCartMenuItem(getCartSize());
+    
+    setTimeout(()=>{
+        addToCartButtonDOM.textContent = "agregar al carrito";
+        addToCartButtonDOM.style = "background-color: none";
+        addToCartButtonDOM.addEventListener('click',addToCart);
+    }, 1500);
 };
 
 function comprar_main(){

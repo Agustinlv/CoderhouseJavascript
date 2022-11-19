@@ -45,5 +45,9 @@
     ],
     "profile": {
         "name": "chunkypuzzles"
+    },
+    "payment": {
+        "resolve": "El pago se ha realizado con éxito",
+        "error": "Se ha producido un problema al intentar realizar el pago. Por favor, vuelva a intentarlo"
     }
 }

@@ -95,9 +95,8 @@ function saveUser(newUser){
 };
 
 function loginMain(){
-    let loguedStatus = getLoguedStatus();
     updateCartMenuItem(getCartSize());
-    if(loguedStatus == "true"){
+    if(getLoguedStatus() === "true"){
         toggleLoginButton(true);
     }else{
         toggleLoginButton(false);

@@ -1,4 +1,3 @@
-const fs = require('fs');
 const userDBKey = "userDB";
 const loguedInKey = "loguedIn";
 const cartKey = "cart";
@@ -11,50 +10,7 @@ const passwordInput = document.getElementById('password');
 const comprarMenuItem = document.getElementById('comprarMenuItem');
 const cartMenuItem = document.getElementById('carritoMenuItem');
 const catalogContainer = document.getElementById('catalogContainer');
-const catalog = [
-    {
-        id: 1,
-        name: "joker",
-        value: 4500,
-        count: 200,
-        image: "../img/thumbs/joker-van-gogh.png"
-    },
-    {
-        id: 2,
-        name: "gato pop",
-        value: 3500,
-        count: 250,
-        image: "../img/thumbs/gato-pop.png"
-    },
-    {
-        id: 3,
-        name: "lapices de colores",
-        value: 3000,
-        count: 220,
-        image: "../img/thumbs/lapices.png"
-    },
-    {
-        id: 4,
-        name: "leon multicolor",
-        value: 4000,
-        count: 500,
-        image: "../img/thumbs/leon-multicolor.png"
-    },
-    {
-        id: 5,
-        name: "gradientes",
-        value: 3500,
-        count: 200,
-        image: "../img/thumbs/gradientes.png"
-    },
-    {
-        id: 6,
-        name: "catrina",
-        value: 6000,
-        count: 500,
-        image: "../img/thumbs/catrina.png"
-    }
-];
+const axios = require('axios').default;
 
 class User {
     realname = "";
@@ -65,6 +21,12 @@ class User {
         this.username= username;
         this.password = password;
     };
+};
+
+async function fetchCatalog(){
+    let url = 'https://my-json-server.typicode.com/agustinlv/coderhousejavascript/products';
+    let catalog = await fetch(url).then((response)=>response.json());
+    return catalog;
 };
 
 function toggleItems(show){
@@ -84,6 +46,7 @@ function createStoredCart(){
     if(!storedCart){
         storedCart = [];
         localStorage.setItem(cartKey,JSON.stringify(storedCart));
+        return storedCart;
     };
     return JSON.parse(storedCart);
 };
@@ -98,5 +61,10 @@ function updateCartMenuItem(size){
 };
 
 function getLoguedStatus(){
-    return localStorage.getItem(loguedInKey);
+    let isLogued = localStorage.getItem(loguedInKey);
+    if (!isLogued){
+        localStorage.setItem(loguedInKey,JSON.stringify(["false"]));
+        return false;
+    };
+    return isLogued;
 };
