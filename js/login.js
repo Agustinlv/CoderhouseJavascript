@@ -80,7 +80,7 @@ function login(){
         };
     }else{
         loginMessage.textContent = "La cuenta ha sido creada con éxito";
-        newUser.saveUser();
+        login.saveUser();
     };
 
     toggleLoguedStatus();

@@ -21,7 +21,7 @@ async function populateCart(){
         let cartItemDOM = document.createElement('div');
         let cartItemImgDOM = document.createElement('img');
         let cartItemNameDOM = document.createElement('div');
-        let cartItemDescDOM = document.createElement('cartItemDesc');
+        let cartItemDescDOM = document.createElement('div');
         let cartQtyContDOM = document.createElement('div');
         let removeButtonDOM = document.createElement('button');
         let UlDOM = document.createElement('ul');
